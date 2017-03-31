@@ -1,0 +1,65 @@
+
+*{
+	padding:0;
+	margin: 0;
+}
+#blurdiv{
+	margin:0 auto;
+	position:relative;
+
+}
+
+#blurimg{
+	filter:blur(20px);
+	-webkit-filter:blur(20px);
+	-ms-filter:blur(20px);
+	-o-filter:blur(20px);
+	display:block;
+	margin:0 auto;
+	position:absolute;
+	z-index:0;
+	top:0;
+	left:0;
+}
+
+#canvas{
+	display:block;
+	margin:0 auto;
+	position:absolute;
+
+	z-index:100;
+	top:0;
+	left:0;
+}
+
+.btn{
+	width:100px;
+	height:30px;
+	line-height: 30px;
+	text-align:center;
+	display:block;
+	position:absolute;
+	text-decoration: none;
+	border-radius: 5px;
+	z-index:200;
+	color:white;
+}
+
+#btnReset{
+	left:50px;
+	bottom:20px;
+	background-color:#058;
+}
+
+#btnReset:hover{
+	background-color:#047;
+}
+
+#btnShow{
+	right:50px;
+	bottom:20px;
+	background-color:#085;
+}
+#btnShow:hover{
+	background-color:#074;
+}

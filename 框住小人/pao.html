@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>HTML 5</title>
+	<style>
+	*{
+		padding:0px;
+		margin:0px;
+	}
+	</style>
+</head>
+<body>
+<canvas id="demo" >您的浏览器不支持canvas标签。</canvas>
+
+<script type="text/javascript">
+(function(){
+    // canvas
+    var canvas = document.getElementById('demo');
+    var ctx = canvas.getContext('2d');
+
+    //player base
+    var playerImage = new Image();
+    playerImage.src = 'xiaoRen.png';
+    var player = {
+        x: 50,       // 在canvas中的坐标
+        y: 0,
+        imageX: 0,  // 图像定位坐标
+        imageY: 0,
+        width: 50,  // 图像显示区域大小
+        height: 60,
+        stop: true , // 是否停止
+        direction:"right"
+    };
+
+    function clean () {
+        // clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function playerInit () {
+        // init player
+        playerImage.onload = _drawPlayer;
+    }
+
+    function playerMove (value) {
+        if('right' === value){
+            // move right
+            if (player.stop) {
+                player.imageX += 50;
+            }else{
+                player.imageX = 0;
+            }
+            if (player.imageX >= 150) {
+                player.imageX = 0;
+            };
+            // player move speed
+            player.x += 5;
+            player.imageY = 0;
+
+        } else if ('left' === value){
+            // move left
+            if (player.stop) {
+                player.imageX += 50;
+            }else{
+                player.imageX = 0;
+            }
+            if (player.imageX >= 150) {
+                player.imageX = 0;
+            };
+            // player move speed
+            player.x -= 5;
+            player.imageY = 60;
+        };
+
+        clean();
+        _drawPlayer();
+    }
+
+    function _drawPlayer () {
+        // draw player image
+        ctx.drawImage(playerImage, player.imageX, player.imageY, player.width, player.height, player.x, canvas.height - player.height, player.width, player.height);
+    }
+
+    function playerAction (value) {
+        var posX = 0;
+        var posY = 0;
+        // console.log(player.x);
+        switch(value){
+            case 'up':
+                playerJump();
+                break;
+            case 'right':
+                posX = player.x + player.width;
+                console.log("right");
+                if (posX >= canvas.width) {
+                	player.direction="left";
+                    return
+                };
+                //player.x += 5;
+                playerMove(value);
+                break;
+            case 'down':
+                break;
+            case 'left':
+                if (player.x < 5) {
+                	player.direction="right";
+                    return;
+                };
+                //player.x -= 5;
+                playerMove(value);
+                break;
+        };
+        // console.log(player.x);
+        return {x: player.x, y: player.y};
+    }
+
+    //init canvas
+    var init = (function(options){
+        options = options || {};
+        canvas.width =window.innerWidth;//  options.width || 500;
+        canvas.height = window.innerHeight;//options.height || 300;
+
+        //init draw rect
+        playerInit();
+
+        setInterval(function(){
+        	playerAction(player.direction);
+        },50);        	
+    	
+    })({width:800, height:400});
+
+})();
+</script>
+</body>
+</html>

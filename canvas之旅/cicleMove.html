@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta charset="UTF-8">
+	<style>
+	#canvas-wrapper{
+		position:relative;
+		width:1200px;
+		height:800px;
+		margin:0px auto;
+
+	}
+	#canvas{
+		border:1px solid gray
+	}
+
+	#controller{
+		position:absolute;
+		top:30px;
+		left:30px;
+		background-color:rgba(0,85,116,0.7);
+		padding:5px 20px 25px 20px;
+		border-radius:10px;
+	}
+
+	#controller h1{
+		color:white;
+		font-family:Microsoft Yahei;
+		font-weight: bolder;
+	}
+
+	#canvas-btn{
+		display:inline-block;
+		background-color:#8b0;
+		color:white;
+		font-size:14px;
+		padding:5px 15px;
+		border-radius:6px;
+		text-decoration:none;
+		margin-top:10px;
+		margin-right:20px;
+	}
+
+	#canvas-btn :hover{
+		text-decoration:none;
+		background-color:#7a0;
+	}
+
+	.color-btn{
+		display:inline-block;
+		padding:5px 15px;
+		border-radius:6px;
+		font-size:14px;
+		margin-top:10px;
+		margin-right:5px;
+		text-decoration:none;
+	}
+
+	.color-btn :hover{
+		text-decoration: none;
+	}
+
+	#white-color-btn{
+		background-color:white;
+	}
+	#black-color-btn{
+		background-color:black;
+	}
+
+	</style>
+	<title>Document</title>
+</head>
+<body>
+<div id="canvas-wrapper">
+	<canvas id="canvas" >
+			当前浏览器不支持canvas，请更换浏览器。
+	</canvas>
+	<div id="controller">
+		<h1>Canvas绘图之旅</h1>
+		<a href="#" id="canvas-btn">停止运动</a>
+		<a href="#" id="white-color-btn" class="color-btn">&nbsp;</a>
+		<a href="#" id="black-color-btn" class="color-btn">&nbsp;</a>
+	</div>
+</div>
+	<script>
+		var canvas=document.getElementById("canvas");
+		var context=canvas.getContext("2d");
+		var balls=[];
+		var themeColor="white";
+		var isMoving=true;
+		window.onload=function(){
+
+			canvas.width=1200;
+			canvas.height=800;
+			for(var i=0;i<100;i++){
+				var R=Math.floor(Math.random()*255);
+				var G=Math.floor(Math.random()*255);
+				var B=Math.floor(Math.random()*255);
+				var radius=Math.random()*50+20;
+
+				var aball={
+						x:Math.random()*(canvas.width-2*radius)+radius,
+						y:Math.random()*(canvas.height-2*radius)+radius,
+						r:radius,
+						color:"RGB("+R+","+G+","+B+")",
+						vx:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100)),
+						vy:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100))
+				};
+				balls[i]=aball;
+			}
+
+			setInterval(
+				function(){
+					draw();
+					if(isMoving){
+						update();
+					}
+				}
+				,
+				50
+				);
+		}
+
+		function draw(){
+			context.clearRect(0,0,canvas.width,canvas.height);
+
+			if(themeColor=="black"){
+				context.fillStyle="black";
+				context.fillRect(0,0,canvas.width,canvas.height);
+			}
+
+			for(var i=0;i<balls.length;i++){
+				context.beginPath();
+				context.globalCompositeOperation="xor";
+				context.arc(balls[i].x,balls[i].y,balls[i].r,0,2*Math.PI);
+				context.fillStyle=balls[i].color;
+				context.closePath();
+				context.fill();
+			}
+		}
+		function update(){
+			for(var i=0;i<balls.length;i++){
+				balls[i].x+=balls[i].vx;
+				balls[i].y+=balls[i].vy;
+				if(balls[i].x+balls[i].r>=canvas.width){
+					balls[i].vx=-balls[i].vx;
+					balls[i].x=canvas.width-balls[i].r;
+				}
+
+				if(balls[i].x-balls[i].r<=0){
+					balls[i].vx=-balls[i].vx;
+					balls[i].x=balls[i].r;
+				}
+
+				if(balls[i].y-balls[i].r<=0){
+					balls[i].vy=-balls[i].vy;
+					balls[i].y=balls[i].r;
+				}
+
+				if(balls[i].y+balls[i].r>=canvas.height){
+					balls[i].vy=-balls[i].vy;
+					balls[i].y=canvas.height-balls[i].r;
+				}
+			}
+		}
+
+		document.getElementById("canvas-btn").onclick=function(){
+			if(isMoving){
+				isMoving=false;
+				this.text="开始运动";
+			}else{
+				isMoving=true;
+				this.text="停止运动";
+			}
+			return false;
+		}
+
+		document.getElementById("white-color-btn").onclick=function(){
+				themeColor="white";
+				return false;
+		}
+
+		document.getElementById("black-color-btn").onclick=function(){
+				themeColor="black";
+				return false;
+		}
+	</script>
+</body>
+</html>

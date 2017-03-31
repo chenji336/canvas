@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html >
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<!-- <body>
+	<canvas id="canvas" style="display:block;margin:50px auto;"> -->
+		<body>
+			<div style="display:block;
+			position: relative;
+			width: 400px;
+			height: 400px;
+			overflow: hidden;">
+			<canvas id="canvas" style="position:absolute;border:1px solid gray;" width=300 height=300>
+				当前浏览器不支持Canvas，请更换浏览器后再试
+			</canvas>
+
+			<div style="position:absolute;width: 400px;
+			height: 400px;"><p style="line-height: 400px;text-align: center;">68</p></div>
+		</div>
+		<script>
+			window.onload=function(){
+				var canvas=document.getElementById("canvas");
+				var context=canvas.getContext("2d");
+				context.beginPath();
+				context.arc(150,200,100,0.8*Math.PI,2.2*Math.PI,false);
+				context.lineWidth=10;
+				context.strokeStyle="RGB(238,238,238)";
+				context.stroke();
+
+				// context.beginPath();
+				// context.arc(150,200,100,0.8*Math.PI,2.0*Math.PI,false);
+				// context.lineWidth=10;
+				// context.strokeStyle="RGB(60,186,255)";
+				// context.stroke();
+
+				var step=1;
+				setInterval(
+					function(){
+						step+=0.005;
+						if(step<=1.500){
+							context.beginPath();
+							context.arc(150,200,100,(0.8-1+step)*Math.PI,step*Math.PI,false);
+							context.strokeStyle="RGB(60,186,255)";
+							context.stroke();
+						}
+					}
+					,
+					10
+					);
+			}
+
+
+		</script>
+
+	</body>
+	</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" >
+		当前浏览器不支持Canvas，请更换浏览器后再试
+	</canvas>
+
+	<script>
+		window.onload=function(){
+			var canvas=document.getElementById("canvas");
+		    canvas.width=1200;
+			canvas.height=800;
+			// canvas.width=800*2;
+			// canvas.height=800*2;
+
+			// canvas.style.width="800px";
+			// canvas.style.height="800px";
+			var context=canvas.getContext("2d");
+
+
+			
+
+			var grap=context.createLinearGradient(0,0,0,800);
+			grap.addColorStop(0.0,"black");
+			grap.addColorStop(1.0,"#035");
+			context.fillStyle=grap;
+
+			context.fillRect(0,0,canvas.width,canvas.height);
+			for(var i=0;i<200;i++){
+				var x=Math.random()*canvas.width;
+				var y=Math.random()*canvas.height*0.65;
+				var R=Math.random()*10;
+				var r=R/2;
+				var a=Math.random()*360;	
+				drawStar(context,x,y,r,R,a);
+			}
+			
+
+		}
+
+		function drawStar(cxt,x,y,r,R,rot){
+			cxt.beginPath();
+			for(var i=0;i<5;i++){
+				cxt.lineTo(Math.cos((18+72*i-rot)/180*Math.PI)*R+x,
+					-Math.sin((18+72*i-rot)/180*Math.PI)*R+y);
+
+				cxt.lineTo(Math.cos((54+72*i-rot)/180*Math.PI)*r+x,
+					-Math.sin((54+72*i-rot)/180*Math.PI)*r+y);
+			}
+
+			cxt.closePath();
+			cxt.lineWidth=3;
+			cxt.fillStyle="#fb3";
+			cxt.strokeStyle="#fb5";
+			cxt.lineJoin="round";
+
+
+			cxt.fill();
+			cxt.stroke();
+		}
+	</script>
+</body>
+</html>

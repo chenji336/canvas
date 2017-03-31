@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+.jqm-round-wrap{
+    display:block;position:relative;width:100px;height:100px;overflow:hidden;
+    border-radius:65px;
+    -webkit-border-radius:65px;
+}
+.jqm-round-sector{
+    position:absolute;width:100px;height:100px;
+}
+.jqm-round-bg { 
+    position:absolute;width:100px;height:100px;background-color:#f76220;
+    border-radius:65px;
+    -webkit-border-radius:65px;
+}
+.jqm-round-circle{
+    position:absolute;background-color:#FFF;width:94px;height:94px;left:2.5px;top:2.5px;z-index:10;
+    border-radius:60px;
+    -webkit-border-radius:60px;
+}
+.jqm-round-circle p{font-size:14px;line-height:94px;margin:0;text-align:center;width:100%;font-weight:bold;}
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+*{
+  padding:0px;
+  margin:0px;
+}
+  </style>
+
+</head>
+<!-- <body>
+  <canvas id="canvas" style="display:block;margin:50px auto;"> -->
+    <body style="height:100%;"> 
+      <canvas id="canvas" width=300 height=300>
+        当前浏览器不支持Canvas，请更换浏览器后再试
+      </canvas>
+    </div>
+    <script>
+      window.onload=function(){
+        var canvas=document.getElementById("canvas");
+        var context=canvas.getContext("2d");
+        
+        canvas.width=document.body.clientWidth*2;
+        canvas.height=document.body.clientWidth*2;
+        var radius=(canvas.width-200)/2;
+        canvas.style.width=canvas.width/2+"px";
+        canvas.style.height=canvas.height/2+"px";
+        ball={x:radius+100,y:radius+100,r:radius};  
+          var step=0.8;
+          setInterval(
+            function(){
+              step+=0.01;
+              if(step<=1.500){
+                // context.clearRect(0,0,canvas.width,canvas.height);
+
+                context.beginPath();
+                context.arc(ball.x,ball.y,ball.r,0.8*Math.PI,2.2*Math.PI,false);
+
+                context.lineWidth=20;
+                context.strokeStyle="RGB(238,238,238)";
+                context.stroke();
+
+                context.beginPath();
+                context.lineWidth=20;
+                context.arc(ball.x,ball.y,ball.r,0.8*Math.PI,step*Math.PI,false);
+                context.strokeStyle="RGB(60,186,255)";
+                context.stroke();
+              }
+            }
+            ,
+            10
+            );
+
+      
+             //设置字体样式
+            context.font = "120px 微软雅黑";
+            context.textAlign="center";
+            context.textBaseline="middle";
+            //设置字体填充颜色
+            context.fillStyle = "RGB(60,186,255)";
+            //从坐标点(50,50)开始绘制文字
+            context.fillText("58", ball.x, ball.y);
+            var textWidth=context.measureText("58").width;
+
+
+             context.font = "60px 微软雅黑";
+            //设置字体填充颜色
+            context.fillStyle = "RGB(60,186,255)";
+            //从坐标点(50,50)开始绘制文字
+            context.fillText("%", ball.x+textWidth/3*2, ball.y-10);
+
+              context.font = "40px 微软雅黑";
+            //设置字体填充颜色
+            context.fillStyle = "#999999";
+            //从坐标点(50,50)开始绘制文字
+            context.fillText("预算执行进度", ball.x, ball.y+ball.r*0.5);
+      
+        }
+
+
+      </script>
+      
+    </body>
+    </html>
+

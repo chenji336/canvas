@@ -1,0 +1,76 @@
+#canvas{
+	margin:0px auto;
+	/*border:1px solid gray;*/
+	display:block;
+}
+
+#controller{
+	margin:0px auto;
+	width:800px;
+}
+
+.op_btn{
+	float:right;
+	margin:10px 0px 0px 10px;
+	border:2px solid #aaa;
+	width:80px;
+	height:40px;
+	line-height:4px;
+	font-size:20px;
+	text-align:center;
+	border-radius:5px;
+	cursor:pointer;
+	background-color:white;
+	font-weight: bold;
+	font-family: Microsoft Yahei,Arial;
+}
+
+.op_btn:hover{
+	background-color:#def;
+}
+
+.clearFloat{
+	clear:both;
+}
+
+.color_btn{
+	float:left;
+	margin:10px 10px 0 0;
+	border:5px solid white;
+	width:40px;
+	height:40px;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+.color_btn:hover{
+	border:5px solid violet;
+}
+
+.color_btn_selected{
+	border:5px solid blueviolet;
+}
+
+#green_btn{
+	background-color:green;
+}
+
+#black_btn{
+	background-color:black;
+}
+
+#blue_btn{
+	background-color: blue;
+}
+
+#red_btn{
+	background-color: red;
+}
+
+#orange_btn{
+	background-color: orange;
+}
+
+#yellow_btn{
+	background-color:yellow;
+}
